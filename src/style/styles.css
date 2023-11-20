@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* #region Header Bar */
+#headerBar, #headerBarFarRightSide {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(121, 198, 231);
+    height: 10%;
+}
+
+#headerBar {
+    padding-left: 2rem;
+}
+
+#headerBarFarRightSide {
+    gap: 20px;
+    padding-right: 2rem;
+}
+
+#headerBarLocation {
+    padding-left: 120px;
+}
+
+#headerBarSettings {
+    height: 600%;
+}
+/* #endregion */
+
+/* #region Nav Bar */
+#navBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(216, 231, 121);
+    height: 5%;
+    gap: 2rem;
+}
+
+/* #endregion */
+
+/* #region Main Window */
+#contentWindow {
+    display: flex;
+    background-color: orange;
+    height: 85%;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+.windowCard {
+    height: 90%;
+    width: 25%;
+    background-color: gray;
+    border: medium solid black;
+    border-radius: 25px;
+    text-align: center;
+    padding: 1rem;
+}
+
+#leftCardCondition {
+    margin: auto;
+    height: 90px;
+}
+
+#leftCardContent {
+    margin-top: 1rem;
+    display: flex;
+    margin: 1rem;
+}
+
+#leftCardLabels {
+    text-align: left;
+    width: 50%;
+}
+
+#leftCardLabels li {
+    margin: 10px 0;
+}
+
+#rightCardLabels {
+    text-align: right;
+    width: 50%;
+}
+
+#rightCardLabels li {
+    margin: 5px 0;
+}
+
+/* #endregion */

@@ -8,6 +8,8 @@ Repo for the weather app project in the javascript course of the Odin Project
     - ![Alt text](design/image.png)
     - ![Alt text](design/image1.png)
     - ![Alt text](design/image3.png)
+- Also refactored to try out the other syntax (rather than promise, async)
 - Quick stab at the design:
     - ![Alt text](design/design.png)
+    
 # Todo
