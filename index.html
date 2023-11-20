@@ -7,6 +7,44 @@
     <script src="main.js" defer></script>
 </head>
 <body>
-  <button>Click Me!</button>
+  <div id="headerBar">
+    <p id="headerBarTitle">Blakely's Weather App</p>
+    <p id="headerBarLocation">Location</p>
+    <div id="headerBarFarRightSide">
+      <p id="headerBarCredits">Developed By Blakely Mayhall</p>
+      <img id="headerBarSettings"> <!--src="../src/imgs/icons8-settings-96.png">-->
+    </div>
+  </div>
+  <div id="navBar">
+    <p id="currentDaySelector" class="navBarButton">Today</p>
+    <p id="tomorrowSelector" class="navBarButton">Tomorrow</p>
+    <p id="followingDaySelector" class="navBarButton">11/19</p>
+  </div>
+  <div id="contentWindow">
+    <div id="leftCard" class="windowCard">
+      <img id="leftCardCondition"> <!--src="../src/imgs/icons8-settings-96.png">-->
+      <div id="leftCardContent">
+        <ul id="leftCardLabels">
+          <li>Condition:</li>
+          <li>Temperature:</li>
+          <li>&nbsp&nbsp&nbspTemp. Hi:</li>
+          <li>&nbsp&nbsp&nbspTemp. Lo:</li>
+          <li>Wind:</li>
+          <li>Humidity:</li>
+          <li>Cloud Cover:</li>
+          <li>Chance of Rain?:</li>
+          <li>Chance of Snow?:</li>
+          <li>Sunrise:</li>
+          <li>Sunset:</li>
+        </ul>
+        <ul id="rightCardLabels">
+          <li>ConditionValue</li>
+        </ul>
+      </div>
+    </div>
+    <div id="rightCard" class="windowCard">
+      
+    </div>
+  </div>
 </body>
 </html>
