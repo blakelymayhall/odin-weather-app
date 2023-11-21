@@ -12,4 +12,14 @@ Repo for the weather app project in the javascript course of the Odin Project
 - Quick stab at the design:
     - ![Alt text](design/design.png)
     
+### 11/20/23
+- Got the initial html set up. Its pretty ugly, will need some cleaning, but I will try a different approach this time and focus on that near the end
+- Going to try to recall some model-view-controller stuff from the Swift lessons I did a while ago 
+    - Last project got a bit ugly with just a "DomManager"...
+
 # Todo
+- Implement MVC for the header bar location
+    - Add a button to enter location
+        - Maybe a browser alert window.. don't think a form is needed
+        - Look into ways to input location data. Don't want to open a rabbit hole here.
+    - Default locaiton to St Louis

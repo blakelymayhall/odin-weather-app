@@ -71,6 +71,8 @@ ul {
     padding: 1rem;
 }
 
+/* #region Left Card */
+
 #leftCardCondition {
     margin: auto;
     height: 90px;
@@ -80,6 +82,7 @@ ul {
     margin-top: 1rem;
     display: flex;
     margin: 1rem;
+    font-size: 1.2rem;
 }
 
 #leftCardLabels {
@@ -91,13 +94,36 @@ ul {
     margin: 10px 0;
 }
 
-#rightCardLabels {
+#leftCardValues {
     text-align: right;
     width: 50%;
 }
 
-#rightCardLabels li {
-    margin: 5px 0;
+#leftCardValues li {
+    margin: 10px 0;
+}
+
+/* #region Right Card */
+#rightCard {
+    overflow-y: scroll;
+}
+
+.hourCard {
+    margin-bottom: 5px;
+    height: 20%;
+    width: 100%;
+    background-color: white;
+    display: grid;
+    border: medium solid black;
+    border-radius: 25px;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 50% 50%;
+}
+
+.cardCell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* #endregion */

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 module.exports = {
     "env": {
         "browser": true,
@@ -25,7 +26,7 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        "prettier/prettier": "error"
+        "prettier/prettier": ["error", { tabWidth: 4 }]
     },
     "plugins": [
         "prettier"
