@@ -17,6 +17,11 @@ Repo for the weather app project in the javascript course of the Odin Project
 - Going to try to recall some model-view-controller stuff from the Swift lessons I did a while ago 
     - Last project got a bit ugly with just a "DomManager"...
 
+### 11/26/23
+- Start MVC design with most simple part of page - the header bar
+	- Yikes, this was harder than I thought it would be
+- Need to spend some time thinking about this and researching.. its a bit fuzzy how this should all be implemented for maximum usefulness
+
 # Todo
 - Implement MVC for the header bar location
     - Add a button to enter location

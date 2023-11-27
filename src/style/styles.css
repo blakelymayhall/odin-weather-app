@@ -30,8 +30,15 @@ ul {
     padding-right: 2rem;
 }
 
-#headerBarLocation {
-    padding-left: 120px;
+#headerBarCenter {
+    padding-left: 100px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#headerBarChangeLocation {
+    height: 70%;
 }
 
 #headerBarSettings {
