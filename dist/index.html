@@ -24,6 +24,23 @@
     <p id="followingDaySelector" class="navBarButton">11/19</p>
   </div>
   <div id="contentWindow">
+    <form id="settingsOverlay">
+      <div id="settingsOverlayCloseButton">
+        x
+     </div>
+      <p>Settings:</p>
+      <div class="settingsOverlayRow">
+        <label for="metricToggle">Metric:</label>
+        <input type="checkbox" id="metricToggle">
+      </div>
+      <div class="settingsOverlayRow">
+        <label for="tempUnits">Temperature Units:</label>
+        <select id="tempUnits">
+          <option value="fahrenheit">Fahrenheit</option>
+          <option value="celsius">Celsius</option>
+        </select>
+      </div>
+    </form>
     <div id="leftCard" class="windowCard">
       <img id="leftCardCondition"> <!--src="../src/imgs/icons8-settings-96.png">-->
       <div id="leftCardContent">

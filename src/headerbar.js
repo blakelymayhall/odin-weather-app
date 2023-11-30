@@ -1,57 +1,62 @@
-// Header Bar Model
-const headerBarModel = () => {
-    let settingsOpen = false;
-    let locationChangeOpen = false;
-    let chosenLocation = "Rogers, AR";
+const headerBarFactory = (weatherAppInterface) => {
+    // Header Bar
+    //------------------------------------------------------------------------
+    const updateLocation = () => {
+        document.querySelector("#headerBarLocation").textContent =
+            weatherAppInterface.getLocation();
+    };
+    //------------------------------------------------------------------------
 
-    const toggleSettingsOpen = () => {
-        settingsOpen = !settingsOpen;
+    // Init
+    //------------------------------------------------------------------------
+    updateLocation();
+    //------------------------------------------------------------------------
+
+    // Support
+    //------------------------------------------------------------------------
+    const _getUserLocation = () => {
+        const promptText =
+            "Enter a Location Formatted: " +
+            "<City>, <State/Country>\n" +
+            'States may be abbreviated e.g. "St. Louis, MO"';
+        return prompt(promptText);
     };
 
-    const toggleLocationChangeOpen = () => {
-        locationChangeOpen = !locationChangeOpen;
+    const _validateLocation = (userInput) => {
+        // eslint-disable-next-line no-useless-escape
+        const pattern = /^[A-Za-z\s.]+\,\s*[A-Za-z\s]*$/;
+        if (!pattern.test(userInput)) {
+            const errMsg =
+                "Input Error - Unexpected Input Values\n" +
+                "Please enter city, state/country i.e.\nSt. Louis, MO";
+            alert(errMsg);
+        }
+        return pattern.test(userInput);
     };
+    //------------------------------------------------------------------------
 
-    const updateChosenLocation = (inputString) => {
-        chosenLocation = inputString; // TODO - Parse this
-    };
+    // Events
+    //------------------------------------------------------------------------
+    const changeLocationBtn = document.querySelector(
+        "#headerBarChangeLocation",
+    );
+    changeLocationBtn.addEventListener("click", () => {
+        const userInput = _getUserLocation();
+        if (_validateLocation(userInput)) {
+            weatherAppInterface.updateLocation(userInput);
+        }
+    });
 
-    const getChosenLocation = () => {
-        return chosenLocation;
-    };
+    const settingsBtn = document.querySelector("#headerBarSettings");
+    settingsBtn.addEventListener("click", () => {
+        document.querySelector("#settingsOverlay").style.display = "flex";
+        weatherAppInterface.toggleSettingsOpen();
+    });
+    //------------------------------------------------------------------------
 
     return {
-        toggleSettingsOpen,
-        toggleLocationChangeOpen,
-        updateChosenLocation,
-        getChosenLocation,
+        updateLocation,
     };
 };
 
-// Header Bar View
-const headerBarView = () => {
-    const updateHeaderBarLocation = (location) => {
-        console.log(location);
-    };
-
-    return {
-        updateHeaderBarLocation,
-    };
-};
-
-// Header Bar Controller
-const headerBarController = () => {
-    const _model = headerBarModel();
-    const _view = headerBarView();
-
-    const init = () => {
-        _view.updateHeaderBarLocation(_model.getChosenLocation());
-    };
-
-    init();
-    return {
-        
-    };
-};
-
-export { headerBarController };
+export { headerBarFactory };

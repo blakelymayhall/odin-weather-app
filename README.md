@@ -22,9 +22,27 @@ Repo for the weather app project in the javascript course of the Odin Project
 	- Yikes, this was harder than I thought it would be
 - Need to spend some time thinking about this and researching.. its a bit fuzzy how this should all be implemented for maximum usefulness
 
+### 11/27/23
+- I am reading into it, and it sounds like implementing MVC from scratch is not recommended and very difficult... there are frameworks for this sort of thing and I am not sure it is a useful way to spend my time
+- Gonna start over - I am not sure how to fix this 
+
+### 11/28/23
+- Came up with new organization idea - passing an interface layer into modules that need to update parent variables
+- Appears to work - implemented header bar and the ability to update the location
+
+### 11/29/23
+- Figured out how to get async calls to the api working
+- Implemented input validation for city state via regex and a catch on the api call
+
 # Todo
-- Implement MVC for the header bar location
-    - Add a button to enter location
-        - Maybe a browser alert window.. don't think a form is needed
-        - Look into ways to input location data. Don't want to open a rabbit hole here.
-    - Default locaiton to St Louis
+- Implement input validation for city, state
+
+# Nice to Haves
+
+UI:
+- Refactor backgrounds to be cleaner, sleeker
+	- Use gifs? Better icons?
+- Change the check box in settings to a toggle switch
+- Change the combobox to toggle switch in settings for temp
+- Make so you get the proper hover on the close settings button
+- Show "loading" when waiting for API
