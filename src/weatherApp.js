@@ -2,11 +2,13 @@ import { headerBarFactory } from "./headerBar";
 import { settingsOverlayFactory } from "./settingsOverlay";
 import { leftCardFactory } from "./leftCard";
 import { rightCardFactory } from "./rightCard";
+import { navBarFactory } from "./navBar";
 
 const weatherAppFactory = (init_location, init_settings) => {
     // Data
     //------------------------------------------------------------------------
     let location = init_location;
+    let chosenDay = days.TODAY;
     let weatherData;
     let response = null;
     let settingsOpen = false;
@@ -26,6 +28,10 @@ const weatherAppFactory = (init_location, init_settings) => {
 
         const getWeatherData = () => {
             return weatherData;
+        };
+
+        const getChosenDay = () => {
+            return chosenDay;
         };
 
         async function updateLocation(newLocation) {
@@ -51,17 +57,34 @@ const weatherAppFactory = (init_location, init_settings) => {
             }
         }
 
+        const updateSettings = (newSettings) => {
+            settings = newSettings;
+            console.log("Updated Settings:");
+            console.log(settings);
+        };
+
         const toggleSettingsOpen = () => {
-            settingsOverlay.updateDisplayedSettings(settings);
             settingsOpen = !settingsOpen;
+        };
+
+        const updateChosenDay = (newDay) => {
+            chosenDay = newDay;
+            console.log("Updated Settings:");
+            console.log(chosenDay);
+            navBar.underlineChosenDay(chosenDay);
+            leftCard.updateData();
+            rightCard.updateData();
         };
 
         return {
             getLocation,
             getSettings,
             getWeatherData,
+            getChosenDay,
             updateLocation,
             toggleSettingsOpen,
+            updateChosenDay,
+            updateSettings,
         };
     };
     //------------------------------------------------------------------------
@@ -70,6 +93,7 @@ const weatherAppFactory = (init_location, init_settings) => {
     //------------------------------------------------------------------------
     _init();
     const headerBar = headerBarFactory(weatherAppInterface());
+    const navBar = navBarFactory(weatherAppInterface());
     const settingsOverlay = settingsOverlayFactory(weatherAppInterface());
     const leftCard = leftCardFactory(weatherAppInterface());
     const rightCard = rightCardFactory(weatherAppInterface());
@@ -83,6 +107,8 @@ const weatherAppFactory = (init_location, init_settings) => {
         console.log("Updated Data:");
         console.log(weatherData);
         leftCard.updateData();
+        rightCard.updateData();
+        navBar.underlineChosenDay(chosenDay);
     }
 
     async function _getWeatherData(newLocation) {
@@ -97,14 +123,12 @@ const weatherAppFactory = (init_location, init_settings) => {
         }
     }
     //------------------------------------------------------------------------
-
-    // Debug
-    ///////////////////////////////////////////////////////////////////////////////
-    // function doSomething() {
-    //     console.log(weatherData);
-    // }
-    // setInterval(doSomething, 5000); // Time in milliseconds
-    ///////////////////////////////////////////////////////////////////////////////
 };
 
-export { weatherAppFactory };
+const days = {
+    TODAY: Symbol("today"),
+    TOMORROW: Symbol("tomorrow"),
+    FOLLOWING_DAY: Symbol("following_day"),
+};
+
+export { weatherAppFactory, days };

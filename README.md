@@ -33,11 +33,16 @@ Repo for the weather app project in the javascript course of the Odin Project
 ### 11/29/23
 - Figured out how to get async calls to the api working
 - Implemented input validation for city state via regex and a catch on the api call
+- Implemented settings form (not yet hooked up)
+- Implemented left card functionality 
+
+### 11/30/23
+- Implemented the remainder of the controls - navbar, settings changes, right card
 
 # Todo
-- Implement input validation for city, state
-
-# Nice to Haves
+- Plan is to get all the right hooks in place then spruce up the UI
+- Use the location in the api response in the header bar 
+- make settings matter
 
 UI:
 - Refactor backgrounds to be cleaner, sleeker
@@ -46,3 +51,4 @@ UI:
 - Change the combobox to toggle switch in settings for temp
 - Make so you get the proper hover on the close settings button
 - Show "loading" when waiting for API
+- Grey out the hours that have already passed
