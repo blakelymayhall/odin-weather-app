@@ -1,8 +1,24 @@
 const settingsOverlayFactory = (weatherAppInterface) => {
+    // Settings Overlay
+    //------------------------------------------------------------------------
+    const populateSettings = () => {
+        const settings = weatherAppInterface.getSettings();
+
+        document.querySelector("#metricToggle").checked = settings.metric;
+        switch (settings.temp) {
+            case "C":
+                document.querySelector("#tempUnits").value = "celsius";
+                return;
+            default:
+                document.querySelector("#tempUnits").value = "fahrenheit";
+        }
+    };
+    //------------------------------------------------------------------------
+
     // Events
     //------------------------------------------------------------------------
     const closeSettingsBtn = document.querySelector(
-        "#settingsOverlayCloseButton",
+        "#settingsOverlayCloseButton"
     );
     closeSettingsBtn.addEventListener("click", () => {
         const settings = {
@@ -17,6 +33,10 @@ const settingsOverlayFactory = (weatherAppInterface) => {
         weatherAppInterface.toggleSettingsOpen();
     });
     //------------------------------------------------------------------------
+
+    return {
+        populateSettings,
+    };
 };
 
 export { settingsOverlayFactory };

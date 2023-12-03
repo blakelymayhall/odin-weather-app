@@ -39,12 +39,19 @@ Repo for the weather app project in the javascript course of the Odin Project
 ### 11/30/23
 - Implemented the remainder of the controls - navbar, settings changes, right card
 
-# Todo
-- Plan is to get all the right hooks in place then spruce up the UI
+### 12/2/23
 - Use the location in the api response in the header bar 
-- make settings matter
+- persistant data  (not much here, just the location, settings, and day)
+- Gray out passed hours
 
-UI:
+# Todo
+- Scroll to current hour
+- If screen width is below certain threshold or is on mobile, change to one card with extra nav bar 
+
+# Defects
+- Disable horizontal scrolling right card
+
+# UI:
 - Refactor backgrounds to be cleaner, sleeker
 	- Use gifs? Better icons?
 - Change the check box in settings to a toggle switch
@@ -52,3 +59,7 @@ UI:
 - Make so you get the proper hover on the close settings button
 - Show "loading" when waiting for API
 - Grey out the hours that have already passed
+
+# notes
+- can you pass subset of object so you dont have to send whole interface?
+	- Can but not really worth it

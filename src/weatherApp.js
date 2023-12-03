@@ -35,15 +35,6 @@ const weatherAppFactory = (init_location, init_settings) => {
         };
 
         async function updateLocation(newLocation) {
-            // Clean input
-            //    capitalize state abbreviation
-            let state = newLocation.split(",")[1].trim();
-            if (state.length == 2) {
-                newLocation = `${newLocation
-                    .split(",")[0]
-                    .trim()}, ${state.toUpperCase()}`;
-            }
-
             // Call the API
             await _getWeatherData(newLocation);
 
@@ -52,8 +43,19 @@ const weatherAppFactory = (init_location, init_settings) => {
                 weatherData = response;
                 console.log("Updated Data:");
                 console.log(weatherData);
-                location = newLocation;
-                headerBar.updateLocation(location);
+                location =
+                    `${weatherData.location.name}, ` +
+                    `${weatherData.location.region}, ` +
+                    `${weatherData.location.country}`;
+                headerBar.updateLocation();
+                leftCard.updateData();
+                rightCard.updateData();
+
+                localStorage.setItem(
+                    "weatherData",
+                    JSON.stringify(weatherData)
+                );
+                localStorage.setItem("location", JSON.stringify(location));
             }
         }
 
@@ -61,9 +63,14 @@ const weatherAppFactory = (init_location, init_settings) => {
             settings = newSettings;
             console.log("Updated Settings:");
             console.log(settings);
+
+            localStorage.setItem("settings", JSON.stringify(settings));
         };
 
         const toggleSettingsOpen = () => {
+            if (!settingsOpen) {
+                settingsOverlay.populateSettings();
+            }
             settingsOpen = !settingsOpen;
         };
 
@@ -74,6 +81,11 @@ const weatherAppFactory = (init_location, init_settings) => {
             navBar.underlineChosenDay(chosenDay);
             leftCard.updateData();
             rightCard.updateData();
+
+            localStorage.setItem(
+                "chosenDay",
+                JSON.stringify(chosenDay.description)
+            );
         };
 
         return {
@@ -102,13 +114,16 @@ const weatherAppFactory = (init_location, init_settings) => {
     // Support
     //------------------------------------------------------------------------
     async function _init() {
-        await _getWeatherData(location);
-        weatherData = response;
-        console.log("Updated Data:");
-        console.log(weatherData);
-        leftCard.updateData();
-        rightCard.updateData();
-        navBar.underlineChosenDay(chosenDay);
+        if (!(await _loadState())) {
+            await _getWeatherData(location);
+            weatherData = response;
+            location =
+                `${weatherData.location.name}, ` +
+                `${weatherData.location.region}, ` +
+                `${weatherData.location.country}`;
+            console.log("Updated Data:");
+            console.log(weatherData);
+        }
     }
 
     async function _getWeatherData(newLocation) {
@@ -121,6 +136,50 @@ const weatherAppFactory = (init_location, init_settings) => {
         if (response.error) {
             response = null;
         }
+    }
+
+    async function _loadState() {
+        // Error check keys
+        let loadErr = false;
+        let keys = ["weatherData", "location", "settings", "chosenDay"];
+        console.log("Lodaing Data...");
+        keys.forEach((key) => {
+            console.log(JSON.parse(localStorage.getItem(key)));
+            if (JSON.parse(localStorage.getItem(key)) == null) {
+                loadErr = true;
+            }
+        });
+        if (loadErr) {
+            console.log("Error Loading Data...");
+            return false;
+        }
+
+        weatherData = JSON.parse(localStorage.getItem(keys[0]));
+        location = JSON.parse(localStorage.getItem(keys[1]));
+        settings = JSON.parse(localStorage.getItem(keys[2]));
+        switch (JSON.parse(localStorage.getItem(keys[3]))) {
+            case "tomorrow":
+                chosenDay = days.TOMORROW;
+                break;
+            case "following_day":
+                chosenDay = days.FOLLOWING_DAY;
+                break;
+            default:
+                chosenDay = days.TODAY;
+        }
+        
+        // Current Unix time in seconds
+        const currentUnixTime = Math.floor(new Date().getTime() / 1000);
+        const timeElapsed_hrs =
+            (currentUnixTime - weatherData.current.last_updated_epoch) / 3600;
+        if (timeElapsed_hrs > 1) {
+            await _getWeatherData(location);
+            weatherData = response;
+            console.log("Updated Data:");
+            console.log(weatherData);
+        }
+
+        return true;
     }
     //------------------------------------------------------------------------
 };

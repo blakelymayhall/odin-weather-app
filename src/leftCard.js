@@ -21,12 +21,17 @@ const leftCardFactory = (weatherAppInterface) => {
         document.querySelector("#leftCardCondition").src =
             weatherData.day.condition.icon;
         // Load your own icons based on code number and isNight
-        // TODO finish filling this out
+        // TODO finish filling this out consider the settings
         document.querySelector("#conditionVal").textContent =
             weatherData.day.condition.text;
     };
     //------------------------------------------------------------------------
 
+    // Init
+    //------------------------------------------------------------------------
+    updateData();
+    //------------------------------------------------------------------------
+    
     return {
         updateData,
     };

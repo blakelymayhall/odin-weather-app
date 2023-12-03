@@ -3,22 +3,11 @@ import { days } from "./weatherApp";
 const navBarFactory = (weatherAppInterface) => {
     // Nav Bar
     //------------------------------------------------------------------------
-    const setFollowingDay = () => {
-        const followingDayElem = document.querySelector(
-            "#followingDaySelector",
-        );
-        const futureDate = new Date(new Date().getTime() + 48 * 60 * 60 * 1000);
-        const formattedDate = futureDate.toLocaleDateString("en-US", {
-            month: "2-digit",
-            day: "2-digit",
-        });
-        followingDayElem.textContent = formattedDate;
-    };
-
-    const underlineChosenDay = (chosenDay) => {
+    const underlineChosenDay = () => {
         // Clear underlines
         const dayElems = document.querySelectorAll(
-            "#currentDaySelector, #tomorrowSelector, #followingDaySelector",
+            // eslint-disable-next-line prettier/prettier
+            "#currentDaySelector, #tomorrowSelector, #followingDaySelector"
         );
         dayElems.forEach((dayElem) => {
             dayElem.style.cssText = "text-decoration:none;";
@@ -26,7 +15,7 @@ const navBarFactory = (weatherAppInterface) => {
 
         // Underline new day
         let selector;
-        switch (chosenDay) {
+        switch (weatherAppInterface.getChosenDay()) {
             case days.TOMORROW:
                 selector = "#tomorrowSelector";
                 break;
@@ -40,11 +29,27 @@ const navBarFactory = (weatherAppInterface) => {
             "text-decoration:underline;";
     };
     //------------------------------------------------------------------------
+    // Support
+    //------------------------------------------------------------------------
+    const _setFollowingDay = () => {
+        const followingDayElem = document.querySelector(
+            // eslint-disable-next-line prettier/prettier
+            "#followingDaySelector"
+        );
+        const futureDate = new Date(new Date().getTime() + 48 * 60 * 60 * 1000);
+        const formattedDate = futureDate.toLocaleDateString("en-US", {
+            month: "2-digit",
+            day: "2-digit",
+        });
+        followingDayElem.textContent = formattedDate;
+    };
+    //------------------------------------------------------------------------
 
     // Events
     //------------------------------------------------------------------------
     const dayElems = document.querySelectorAll(
-        "#currentDaySelector, #tomorrowSelector, #followingDaySelector",
+        // eslint-disable-next-line prettier/prettier
+        "#currentDaySelector, #tomorrowSelector, #followingDaySelector"
     );
 
     dayElems.forEach((dayElem) => {
@@ -67,7 +72,8 @@ const navBarFactory = (weatherAppInterface) => {
 
     // Init
     //------------------------------------------------------------------------
-    setFollowingDay();
+    _setFollowingDay();
+    underlineChosenDay();
     //------------------------------------------------------------------------
 
     return {

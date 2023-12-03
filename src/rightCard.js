@@ -3,21 +3,6 @@ import { days } from "./weatherApp";
 const rightCardFactory = (weatherAppInterface) => {
     // Right Card
     //------------------------------------------------------------------------
-    const genCards = () => {
-        const hourCard = document.querySelector(".hourCard");
-        for (let hourCount = 1; hourCount < 24; hourCount++) {
-            const newCard = hourCard.cloneNode(true);
-            newCard.dataset.hour = hourCount;
-
-            let civTimeHour = hourCount > 12 ? hourCount - 12 : hourCount;
-            let ampm = hourCount > 12 ? "PM" : "AM";
-            newCard.querySelector(".hour").textContent =
-                `${civTimeHour}:00 ${ampm}`;
-
-            document.querySelector("#rightCard").appendChild(newCard);
-        }
-    };
-
     const updateData = () => {
         // Get the particular day we are looking for
         let weatherData = weatherAppInterface.getWeatherData();
@@ -35,23 +20,58 @@ const rightCardFactory = (weatherAppInterface) => {
         // Populate the data
         for (let hourCount = 0; hourCount < 24; hourCount++) {
             const hourCard = document.querySelector(
-                `[data-hour="${hourCount}"]`,
+                `[data-hour="${hourCount}"]`
             );
             hourCard.querySelector(".temp").innerHTML =
                 weatherData.hour[hourCount].temp_f + "&degF";
         }
 
-        // TODO finish filling this out
+        // TODO finish filling this out  consider the settings
+    };
+    //------------------------------------------------------------------------
+
+    // Support
+    //------------------------------------------------------------------------
+    const _genCards = () => {
+        const hourCard = document.querySelector(".hourCard");
+        for (let hourCount = 1; hourCount < 24; hourCount++) {
+            const newCard = hourCard.cloneNode(true);
+            newCard.dataset.hour = hourCount;
+
+            let civTimeHour = hourCount > 12 ? hourCount - 12 : hourCount;
+            let ampm = hourCount > 12 ? "PM" : "AM";
+            newCard.querySelector(".hour").textContent =
+                `${civTimeHour}:00 ${ampm}`;
+
+            document.querySelector("#rightCard").appendChild(newCard);
+        }
+    };
+
+    const _colorCards = () => {
+        for (let hourCount = 0; hourCount < 24; hourCount++) {
+            const hourCard = document.querySelector(
+                `[data-hour="${hourCount}"]`
+            );
+            if (hourCount < new Date().getHours()) {
+                hourCard.style.cssText = "background: grey";
+            }
+        }
+    };
+
+    const _scrollToCurrent = () => {
+        const rightCard = document.querySelector("#rightCard");
+        rightCard.scrollTo(0, rightCard.scrollHeight); // TODO get the pixel in the container for the hour card
     };
     //------------------------------------------------------------------------
 
     // Init
     //------------------------------------------------------------------------
-    genCards();
+    _genCards();
+    _colorCards();
+    _scrollToCurrent();
+    updateData();
     //------------------------------------------------------------------------
-
     return {
-        genCards,
         updateData,
     };
 };
