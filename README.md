@@ -44,9 +44,11 @@ Repo for the weather app project in the javascript course of the Odin Project
 - persistant data  (not much here, just the location, settings, and day)
 - Gray out passed hours
 
+### 12/3/23
+- Add card select bar if on mobile or width of screen gets too small
+
 # Todo
 - Scroll to current hour
-- If screen width is below certain threshold or is on mobile, change to one card with extra nav bar 
 
 # Defects
 - Disable horizontal scrolling right card

@@ -58,6 +58,18 @@ ul {
 
 /* #endregion */
 
+/* #region Card Select Bar */
+#cardSelectBar {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgb(121, 231, 138);
+    height: 5%;
+    gap: 2rem;
+}
+
+/* #endregion */
+
 /* #region Main Window */
 #contentWindow {
     display: flex;
@@ -69,8 +81,9 @@ ul {
 }
 
 .windowCard {
-    height: 90%;
+    height: 86%;
     width: 25%;
+    min-width: 345px;
     background-color: gray;
     border: medium solid black;
     border-radius: 25px;

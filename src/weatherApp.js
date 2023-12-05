@@ -3,12 +3,14 @@ import { settingsOverlayFactory } from "./settingsOverlay";
 import { leftCardFactory } from "./leftCard";
 import { rightCardFactory } from "./rightCard";
 import { navBarFactory } from "./navBar";
+import { cardSelectorBarFactory } from "./cardSelectorBar";
 
 const weatherAppFactory = (init_location, init_settings) => {
     // Data
     //------------------------------------------------------------------------
     let location = init_location;
     let chosenDay = days.TODAY;
+    let chosenCard = cards.LEFT;
     let weatherData;
     let response = null;
     let settingsOpen = false;
@@ -32,6 +34,10 @@ const weatherAppFactory = (init_location, init_settings) => {
 
         const getChosenDay = () => {
             return chosenDay;
+        };
+
+        const getChosenCard = () => {
+            return chosenCard;
         };
 
         async function updateLocation(newLocation) {
@@ -88,15 +94,37 @@ const weatherAppFactory = (init_location, init_settings) => {
             );
         };
 
+        const updateCardDisplay = (card, enable) => {
+            chosenCard = card;
+
+            // TODO move these into the cards
+            if (enable) {
+                if (chosenCard == cards.LEFT) {
+                    document.querySelector("#rightCard").style.display = "none";
+                    document.querySelector("#leftCard").style.display = "block";
+                }
+                if (chosenCard == cards.RIGHT) {
+                    document.querySelector("#leftCard").style.display = "none";
+                    document.querySelector("#rightCard").style.display =
+                        "block";
+                }
+            } else {
+                document.querySelector("#rightCard").style.display = "block";
+                document.querySelector("#leftCard").style.display = "block";
+            }
+        };
+
         return {
             getLocation,
             getSettings,
             getWeatherData,
             getChosenDay,
+            getChosenCard,
             updateLocation,
             toggleSettingsOpen,
             updateChosenDay,
             updateSettings,
+            updateCardDisplay,
         };
     };
     //------------------------------------------------------------------------
@@ -106,6 +134,7 @@ const weatherAppFactory = (init_location, init_settings) => {
     _init();
     const headerBar = headerBarFactory(weatherAppInterface());
     const navBar = navBarFactory(weatherAppInterface());
+    const cardSelectorBar = cardSelectorBarFactory(weatherAppInterface());
     const settingsOverlay = settingsOverlayFactory(weatherAppInterface());
     const leftCard = leftCardFactory(weatherAppInterface());
     const rightCard = rightCardFactory(weatherAppInterface());
@@ -167,7 +196,7 @@ const weatherAppFactory = (init_location, init_settings) => {
             default:
                 chosenDay = days.TODAY;
         }
-        
+
         // Current Unix time in seconds
         const currentUnixTime = Math.floor(new Date().getTime() / 1000);
         const timeElapsed_hrs =
@@ -190,4 +219,9 @@ const days = {
     FOLLOWING_DAY: Symbol("following_day"),
 };
 
-export { weatherAppFactory, days };
+const cards = {
+    LEFT: Symbol("left"),
+    RIGHT: Symbol("right"),
+};
+
+export { weatherAppFactory, days, cards };
