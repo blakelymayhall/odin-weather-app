@@ -47,11 +47,16 @@ Repo for the weather app project in the javascript course of the Odin Project
 ### 12/3/23
 - Add card select bar if on mobile or width of screen gets too small
 
+### 12/5/23
+- Disable horizontal scrolling right card
+- Fix the hour selection to gray cards only today and not other days
+- Made the ui prettier when making the window small 
+
 # Todo
 - Scroll to current hour
+- Mobile UI stuff
 
 # Defects
-- Disable horizontal scrolling right card
 
 # UI:
 - Refactor backgrounds to be cleaner, sleeker

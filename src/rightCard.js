@@ -16,6 +16,7 @@ const rightCardFactory = (weatherAppInterface) => {
             default:
                 weatherData = weatherData.forecast.forecastday[0];
         }
+        _colorCards();
 
         // Populate the data
         for (let hourCount = 0; hourCount < 24; hourCount++) {
@@ -48,12 +49,19 @@ const rightCardFactory = (weatherAppInterface) => {
     };
 
     const _colorCards = () => {
-        for (let hourCount = 0; hourCount < 24; hourCount++) {
-            const hourCard = document.querySelector(
-                `[data-hour="${hourCount}"]`
-            );
-            if (hourCount < new Date().getHours()) {
-                hourCard.style.cssText = "background: grey";
+        const hourCards = document.querySelectorAll(".hourCard");
+        hourCards.forEach((hourCard) => {
+            hourCard.style.cssText = "background: white";
+        });
+
+        if (weatherAppInterface.getChosenDay() == days.TODAY) {
+            for (let hourCount = 0; hourCount < 24; hourCount++) {
+                const hourCard = document.querySelector(
+                    `[data-hour="${hourCount}"]`
+                );
+                if (hourCount < new Date().getHours()) {
+                    hourCard.style.cssText = "background: grey";
+                }
             }
         }
     };
