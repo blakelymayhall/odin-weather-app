@@ -17,6 +17,7 @@ const rightCardFactory = (weatherAppInterface) => {
                 weatherData = weatherData.forecast.forecastday[0];
         }
         _colorCards();
+        _scrollToCurrent();
 
         // Populate the data
         for (let hourCount = 0; hourCount < 24; hourCount++) {
@@ -67,8 +68,14 @@ const rightCardFactory = (weatherAppInterface) => {
     };
 
     const _scrollToCurrent = () => {
-        const rightCard = document.querySelector("#rightCard");
-        rightCard.scrollTo(0, rightCard.scrollHeight); // TODO get the pixel in the container for the hour card
+        if (weatherAppInterface.getChosenDay() == days.TODAY) {
+            // Scroll 110px per hour
+            const rightCard = document.querySelector("#rightCard");
+            rightCard.scrollTo(
+                0,
+                Math.min(new Date().getHours() * 110, rightCard.scrollHeight)
+            );
+        }
     };
     //------------------------------------------------------------------------
 

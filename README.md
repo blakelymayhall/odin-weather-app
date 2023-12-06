@@ -51,9 +51,11 @@ Repo for the weather app project in the javascript course of the Odin Project
 - Disable horizontal scrolling right card
 - Fix the hour selection to gray cards only today and not other days
 - Made the ui prettier when making the window small 
+- Make so you get the proper hover on the close settings button
+- Grey out the hours that have already passed
+- Scroll to current hour
 
 # Todo
-- Scroll to current hour
 - Mobile UI stuff
 
 # Defects
@@ -61,11 +63,7 @@ Repo for the weather app project in the javascript course of the Odin Project
 # UI:
 - Refactor backgrounds to be cleaner, sleeker
 	- Use gifs? Better icons?
-- Change the check box in settings to a toggle switch
-- Change the combobox to toggle switch in settings for temp
-- Make so you get the proper hover on the close settings button
 - Show "loading" when waiting for API
-- Grey out the hours that have already passed
 
 # notes
 - can you pass subset of object so you dont have to send whole interface?

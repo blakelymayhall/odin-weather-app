@@ -13,8 +13,15 @@ ul {
     list-style-type: none;
 }
 
-#headerBarChangeLocation:hover, #headerBarSettings:hover, .navBarButton:hover {
+#headerBarChangeLocation:hover, #headerBarSettings:hover, .navBarButton:hover,
+#settingsOverlayCloseButton:hover {
     cursor: pointer;
+}
+
+@font-face {
+    font-family: 'TitleFont';
+    src: url('../fonts/Caveat-VariableFont_wght.ttf') format('truetype');
+    font-style: normal;
 }
 
 /* #region Header Bar */
@@ -30,13 +37,21 @@ ul {
     padding-left: 2rem;
 }
 
+#headerBarTitle {
+    font-family: 'TitleFont';
+    font-size: 3rem;
+    min-width: 370px;
+}
+
 #headerBarFarRightSide {
-    gap: 20px;
+    display: flex;
+    align-items: center;
+    height: 100%;
     padding-right: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #headerBarCenter {
-    padding-left: 100px;
     display: flex;
     align-items: center;
     height: 100%;
@@ -47,7 +62,8 @@ ul {
 }
 
 #headerBarSettings {
-    height: 600%;
+    padding-left: 50px;
+    height: 70%;
 }
 /* #endregion */
 
@@ -59,6 +75,9 @@ ul {
     background: rgb(216, 231, 121);
     height: 5%;
     gap: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 /* #endregion */
@@ -71,6 +90,9 @@ ul {
     background: rgb(121, 231, 138);
     height: 5%;
     gap: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 /* #endregion */
@@ -78,19 +100,20 @@ ul {
 /* #region Main Window */
 #contentWindow {
     display: flex;
-    background-color: orange;
     height: 85%;
     justify-content: center;
     align-items: center;
     gap: 1.6rem;
+    background: url('https://media0.giphy.com/media/uqpK3SuxEY4W9YQvdg/giphy.gif?cid=ecf05e47wpg016yzb1mqvzh86isal3wrgq0akivhp23e0lsy&ep=v1_gifs_search&rid=giphy.gif&ct=g');
+    background-size: fill;
 }
 
 .windowCard {
     height: 86%;
     width: 25%;
     min-width: 345px;
-    background-color: gray;
-    border: medium solid black;
+    background-color: rgba(0, 0, 0, 0.5);;
+    border: medium solid white;
     border-radius: 25px;
     text-align: center;
     padding: 1rem;
@@ -160,6 +183,7 @@ ul {
     display: flex;
     margin: 1rem;
     font-size: 1.2rem;
+    color: white;
 }
 
 #leftCardLabels {
@@ -187,6 +211,7 @@ ul {
 #rightCard {
     overflow-y: scroll;
     overflow-x: hidden;
+    color: black;
 }
 
 .hourCard {
