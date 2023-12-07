@@ -55,15 +55,18 @@ Repo for the weather app project in the javascript course of the Odin Project
 - Grey out the hours that have already passed
 - Scroll to current hour
 
+### 12/6/23
+- images need to be loaded via JS
+- Background gifs, some other ui fixes
+
 # Todo
 - Mobile UI stuff
+- Show "loading" when waiting for API
+- Update data if stale (15 min?
+- Finish filling out data 
+- Flesh out the data cards
 
 # Defects
-
-# UI:
-- Refactor backgrounds to be cleaner, sleeker
-	- Use gifs? Better icons?
-- Show "loading" when waiting for API
 
 # notes
 - can you pass subset of object so you dont have to send whole interface?

@@ -52,7 +52,7 @@ const rightCardFactory = (weatherAppInterface) => {
     const _colorCards = () => {
         const hourCards = document.querySelectorAll(".hourCard");
         hourCards.forEach((hourCard) => {
-            hourCard.style.cssText = "background: white";
+            hourCard.style.cssText = "background: rgb(121, 198, 231);";
         });
 
         if (weatherAppInterface.getChosenDay() == days.TODAY) {

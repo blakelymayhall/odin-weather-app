@@ -24,6 +24,12 @@ const leftCardFactory = (weatherAppInterface) => {
         // TODO finish filling this out consider the settings
         document.querySelector("#conditionVal").textContent =
             weatherData.day.condition.text;
+        document.querySelector("#tempVal").textContent =
+            (weatherAppInterface.getSettings().temp == "F"
+                ? weatherData.day.avgtemp_f
+                : weatherData.day.avgtemp_c) +
+            "°" +
+            weatherAppInterface.getSettings().temp;
     };
     //------------------------------------------------------------------------
 
@@ -31,7 +37,7 @@ const leftCardFactory = (weatherAppInterface) => {
     //------------------------------------------------------------------------
     updateData();
     //------------------------------------------------------------------------
-    
+
     return {
         updateData,
     };

@@ -4,6 +4,10 @@ import { leftCardFactory } from "./leftCard";
 import { rightCardFactory } from "./rightCard";
 import { navBarFactory } from "./navBar";
 import { cardSelectorBarFactory } from "./cardSelectorBar";
+import { backgroundFactory } from "./background";
+
+import settingsBtnImg from "./imgs/icons8-settings-96.png";
+import locationBtnImg from "./imgs/icons8-location-arrow-96.png";
 
 const weatherAppFactory = (init_location, init_settings) => {
     // Data
@@ -53,6 +57,7 @@ const weatherAppFactory = (init_location, init_settings) => {
                     `${weatherData.location.name}, ` +
                     `${weatherData.location.region}, ` +
                     `${weatherData.location.country}`;
+                background.changeBackground();
                 headerBar.updateLocation();
                 leftCard.updateData();
                 rightCard.updateData();
@@ -69,6 +74,8 @@ const weatherAppFactory = (init_location, init_settings) => {
             settings = newSettings;
             console.log("Updated Settings:");
             console.log(settings);
+            leftCard.updateData();
+            rightCard.updateData();
 
             localStorage.setItem("settings", JSON.stringify(settings));
         };
@@ -138,11 +145,18 @@ const weatherAppFactory = (init_location, init_settings) => {
     const settingsOverlay = settingsOverlayFactory(weatherAppInterface());
     const leftCard = leftCardFactory(weatherAppInterface());
     const rightCard = rightCardFactory(weatherAppInterface());
+    const background = backgroundFactory(weatherAppInterface());
     //------------------------------------------------------------------------
 
     // Support
     //------------------------------------------------------------------------
+    function _loadResources() {
+        document.querySelector("#headerBarSettings").src = settingsBtnImg;
+        document.querySelector("#headerBarChangeLocation").src = locationBtnImg;
+    }
+
     async function _init() {
+        _loadResources();
         if (!(await _loadState())) {
             await _getWeatherData(location);
             weatherData = response;
@@ -157,7 +171,7 @@ const weatherAppFactory = (init_location, init_settings) => {
 
     async function _getWeatherData(newLocation) {
         const api =
-            `http://api.weatherapi.com/v1/forecast.json?key=` +
+            `https://api.weatherapi.com/v1/forecast.json?key=` +
             `81118de3a27c4287bd233838231611&q=${newLocation}&days=3&aqi=no&alerts=no`;
 
         response = await fetch(api, { mode: "cors" });
