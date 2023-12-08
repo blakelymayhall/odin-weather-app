@@ -15,7 +15,7 @@ const weatherAppFactory = (init_location, init_settings) => {
     let location = init_location;
     let chosenDay = days.TODAY;
     let chosenCard = cards.LEFT;
-    let weatherData;
+    let weatherData = null;
     let response = null;
     let settingsOpen = false;
     let settings = init_settings;
@@ -159,7 +159,8 @@ const weatherAppFactory = (init_location, init_settings) => {
 
     async function _init() {
         _loadResources();
-        if (!(await _loadState())) {
+        await _loadState();
+        if (!weatherData) {
             await _getWeatherData(location);
             weatherData = response;
             location =
@@ -204,7 +205,8 @@ const weatherAppFactory = (init_location, init_settings) => {
         });
         if (loadErr) {
             console.log("Error Loading Data...");
-            return false;
+            weatherData = null;
+            return;
         }
 
         weatherData = JSON.parse(localStorage.getItem(keys[0]));
