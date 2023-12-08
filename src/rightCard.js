@@ -1,4 +1,5 @@
 import { days } from "./weatherApp";
+import arrowImg from "./imgs/icons8-arrow-100.png";
 
 const rightCardFactory = (weatherAppInterface) => {
     // Right Card
@@ -6,15 +7,16 @@ const rightCardFactory = (weatherAppInterface) => {
     const updateData = () => {
         // Get the particular day we are looking for
         let weatherData = weatherAppInterface.getWeatherData();
+        let weatherDataDay = null;
         switch (weatherAppInterface.getChosenDay()) {
             case days.TOMORROW:
-                weatherData = weatherData.forecast.forecastday[1];
+                weatherDataDay = weatherData.forecast.forecastday[1];
                 break;
             case days.FOLLOWING_DAY:
-                weatherData = weatherData.forecast.forecastday[2];
+                weatherDataDay = weatherData.forecast.forecastday[2];
                 break;
             default:
-                weatherData = weatherData.forecast.forecastday[0];
+                weatherDataDay = weatherData.forecast.forecastday[0];
         }
         _colorCards();
         _scrollToCurrent();
@@ -24,8 +26,23 @@ const rightCardFactory = (weatherAppInterface) => {
             const hourCard = document.querySelector(
                 `[data-hour="${hourCount}"]`
             );
-            hourCard.querySelector(".temp").innerHTML =
-                weatherData.hour[hourCount].temp_f + "&degF";
+            hourCard.querySelector(".temp").textContent =
+                (weatherAppInterface.getSettings().temp == "F"
+                    ? weatherDataDay.hour[hourCount].temp_f
+                    : weatherDataDay.hour[hourCount].temp_c) +
+                "°" +
+                weatherAppInterface.getSettings().temp;
+            hourCard.querySelector(".condition").src =
+                weatherDataDay.hour[hourCount].condition.icon;
+            hourCard.querySelector(".windVal").textContent =
+                weatherAppInterface.getSettings().metric
+                    ? weatherDataDay.hour[hourCount].wind_kph + " kph"
+                    : weatherDataDay.hour[hourCount].wind_mph + " mph";
+            hourCard.querySelector(".windArrow").src = arrowImg;
+            hourCard.querySelector(".windArrow").style.cssText =
+                `transform: rotate(${
+                    weatherDataDay.hour[hourCount].wind_degree - 90
+                }deg);`;
         }
 
         // TODO finish filling this out  consider the settings

@@ -187,8 +187,9 @@ ul {
 }
 
 #leftCardLabels {
+    font-family: Arial, Helvetica, sans-serif;
     text-align: left;
-    width: 50%;
+    width: 47%;
 }
 
 #leftCardLabels li {
@@ -196,8 +197,9 @@ ul {
 }
 
 #leftCardValues {
+    font-family: Arial, Helvetica, sans-serif;
     text-align: right;
-    width: 50%;
+    width: 53%;
 }
 
 #leftCardValues li {
@@ -212,6 +214,8 @@ ul {
     overflow-y: scroll;
     overflow-x: hidden;
     color: black;
+    font-size: 1.2rem;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .hourCard {
@@ -230,6 +234,14 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.windArrow {
+    height: 70%;
+}
+
+.windLabel {
+    font-weight: bolder;
 }
 
 /* #endregion */

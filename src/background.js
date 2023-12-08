@@ -5,37 +5,44 @@ const backgroundFactory = (weatherAppInterface) => {
     //------------------------------------------------------------------------
     const changeBackground = () => {
         let weatherData = weatherAppInterface.getWeatherData();
+
+        let weatherDataDay = null;
         switch (weatherAppInterface.getChosenDay()) {
             case days.TOMORROW:
-                weatherData = weatherData.forecast.forecastday[1];
+                weatherDataDay = weatherData.forecast.forecastday[1];
                 break;
             case days.FOLLOWING_DAY:
-                weatherData = weatherData.forecast.forecastday[2];
+                weatherDataDay = weatherData.forecast.forecastday[2];
                 break;
             default:
-                weatherData = weatherData.forecast.forecastday[0];
+                weatherDataDay = weatherData.forecast.forecastday[0];
         }
 
         let weatherBackground = _weatherImgs.DEFAULT;
-        if (_sunCodes.includes(weatherData.day.condition.code)) {
+        if (_sunCodes.includes(weatherDataDay.day.condition.code)) {
             weatherBackground = _weatherImgs.SUN;
+            if (
+                !weatherData.current.is_day &&
+                weatherAppInterface.getChosenDay() == days.TODAY
+            ) {
+                weatherBackground = _weatherImgs.MOON;
+            }
         }
-        if (_pCloudCodes.includes(weatherData.day.condition.code)) {
+        if (_pCloudCodes.includes(weatherDataDay.day.condition.code)) {
             weatherBackground = _weatherImgs.PCLOUD;
         }
-        if (_cloudCodes.includes(weatherData.day.condition.code)) {
+        if (_cloudCodes.includes(weatherDataDay.day.condition.code)) {
             weatherBackground = _weatherImgs.CLOUD;
         }
-        if (_snowCodes.includes(weatherData.day.condition.code)) {
+        if (_snowCodes.includes(weatherDataDay.day.condition.code)) {
             weatherBackground = _weatherImgs.SNOW;
         }
-        if (_rainCodes.includes(weatherData.day.condition.code)) {
+        if (_rainCodes.includes(weatherDataDay.day.condition.code)) {
             weatherBackground = _weatherImgs.RAIN;
         }
-        if (_stormCodes.includes(weatherData.day.condition.code)) {
+        if (_stormCodes.includes(weatherDataDay.day.condition.code)) {
             weatherBackground = _weatherImgs.STORM;
         }
-
         document.querySelector("#contentWindow").style.cssText =
             `background-image: url(${weatherBackground});`;
     };
@@ -49,6 +56,7 @@ const backgroundFactory = (weatherAppInterface) => {
         STORM: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExenRkdnIxdzBjZTBtbHBjZW5zMms5bDk2dHIycHJ2d25tamsxanQwaSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/RNveokQhEObpqyvYb5/giphy.gif",
         SNOW: "https://media0.giphy.com/media/12wteMTXxjLaVO/giphy.gif?cid=ecf05e477cez6fvymyp0m8s2ctk96cpyz2ngjoi17lynlkdb&ep=v1_gifs_search&rid=giphy.gif&ct=g",
         PCLOUD: "https://media4.giphy.com/media/jeagzAR8ZVawgisnzH/giphy.gif?cid=ecf05e47wngvndf3pl31rco76snd9a4u0waecokh11iboiq1&ep=v1_gifs_search&rid=giphy.gif&ct=g",
+        MOON: "https://media1.giphy.com/media/QgIreLD4taka4/giphy.gif?cid=ecf05e470ed0jvxvvh537purlb6glebs2xn7rbbk9eog0maw&ep=v1_gifs_search&rid=giphy.gif&ct=g",
         DEFAULT:
             "https://media3.giphy.com/media/zwoRf2Ww6LPk4tCL9m/giphy.gif?cid=ecf05e47mr3qhpom1y63p0djdgpb34w086b9s5v87fgb9353&ep=v1_gifs_search&rid=giphy.gif&ct=g",
     };
@@ -67,6 +75,7 @@ const backgroundFactory = (weatherAppInterface) => {
         1243, 1246,
     ];
     const _stormCodes = [1273, 1276, 1279, 1282];
+    const _moonCodes = [_sunCodes, _pCloudCodes];
     //------------------------------------------------------------------------
 
     // Init

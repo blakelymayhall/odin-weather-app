@@ -59,12 +59,15 @@ Repo for the weather app project in the javascript course of the Odin Project
 - images need to be loaded via JS
 - Background gifs, some other ui fixes
 
-# Todo
-- Mobile UI stuff
-- Show "loading" when waiting for API
+### 12/7/23
 - Update data if stale (15 min?
 - Finish filling out data 
 - Flesh out the data cards
+
+# Todo
+- Mobile UI stuff
+- Show "loading" when waiting for API
+
 
 # Defects
 

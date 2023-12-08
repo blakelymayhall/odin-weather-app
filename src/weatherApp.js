@@ -51,6 +51,7 @@ const weatherAppFactory = (init_location, init_settings) => {
             // Update the location
             if (response) {
                 weatherData = response;
+                response = null;
                 console.log("Updated Data:");
                 console.log(weatherData);
                 location =
@@ -92,6 +93,7 @@ const weatherAppFactory = (init_location, init_settings) => {
             console.log("Updated Settings:");
             console.log(chosenDay);
             navBar.underlineChosenDay(chosenDay);
+            background.changeBackground();
             leftCard.updateData();
             rightCard.updateData();
 
@@ -146,6 +148,7 @@ const weatherAppFactory = (init_location, init_settings) => {
     const leftCard = leftCardFactory(weatherAppInterface());
     const rightCard = rightCardFactory(weatherAppInterface());
     const background = backgroundFactory(weatherAppInterface());
+    setInterval(_updateStaleData, 15 * 60 * 60);
     //------------------------------------------------------------------------
 
     // Support
@@ -223,6 +226,14 @@ const weatherAppFactory = (init_location, init_settings) => {
         }
 
         return true;
+    }
+
+    async function _updateStaleData() {
+        await _getWeatherData(location);
+        if (response) {
+            weatherData = response;
+            response = null;
+        }
     }
     //------------------------------------------------------------------------
 };
