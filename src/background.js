@@ -30,9 +30,21 @@ const backgroundFactory = (weatherAppInterface) => {
         }
         if (_pCloudCodes.includes(weatherDataDay.day.condition.code)) {
             weatherBackground = _weatherImgs.PCLOUD;
+            if (
+                !weatherData.current.is_day &&
+                weatherAppInterface.getChosenDay() == days.TODAY
+            ) {
+                weatherBackground = _weatherImgs.MOON;
+            }
         }
         if (_cloudCodes.includes(weatherDataDay.day.condition.code)) {
             weatherBackground = _weatherImgs.CLOUD;
+            if (
+                !weatherData.current.is_day &&
+                weatherAppInterface.getChosenDay() == days.TODAY
+            ) {
+                weatherBackground = _weatherImgs.MOON;
+            }
         }
         if (_snowCodes.includes(weatherDataDay.day.condition.code)) {
             weatherBackground = _weatherImgs.SNOW;
