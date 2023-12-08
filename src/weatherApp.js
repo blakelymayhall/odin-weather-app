@@ -140,15 +140,14 @@ const weatherAppFactory = (init_location, init_settings) => {
 
     // Weather App
     //------------------------------------------------------------------------
+    let headerBar;
+    let navBar;
+    let cardSelectorBar;
+    let settingsOverlay;
+    let leftCard;
+    let rightCard;
+    let background;
     _init();
-    const headerBar = headerBarFactory(weatherAppInterface());
-    const navBar = navBarFactory(weatherAppInterface());
-    const cardSelectorBar = cardSelectorBarFactory(weatherAppInterface());
-    const settingsOverlay = settingsOverlayFactory(weatherAppInterface());
-    const leftCard = leftCardFactory(weatherAppInterface());
-    const rightCard = rightCardFactory(weatherAppInterface());
-    const background = backgroundFactory(weatherAppInterface());
-    setInterval(_updateStaleData, 15 * 60 * 60);
     //------------------------------------------------------------------------
 
     // Support
@@ -170,6 +169,14 @@ const weatherAppFactory = (init_location, init_settings) => {
             console.log("Updated Data:");
             console.log(weatherData);
         }
+        headerBar = headerBarFactory(weatherAppInterface());
+        navBar = navBarFactory(weatherAppInterface());
+        cardSelectorBar = cardSelectorBarFactory(weatherAppInterface());
+        settingsOverlay = settingsOverlayFactory(weatherAppInterface());
+        leftCard = leftCardFactory(weatherAppInterface());
+        rightCard = rightCardFactory(weatherAppInterface());
+        background = backgroundFactory(weatherAppInterface());
+        setInterval(_updateStaleData, 15 * 60 * 60);
     }
 
     async function _getWeatherData(newLocation) {
