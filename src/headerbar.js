@@ -16,10 +16,7 @@ const headerBarFactory = (weatherAppInterface) => {
         );
 
     const _getUserLocation = () => {
-        const promptText =
-            "Enter a Location Formatted: " +
-            "<City>, <State/Country>\n" +
-            'States may be abbreviated e.g. "St. Louis, MO"';
+        const promptText = "Enter a Location:\n" + "e.g. <City>, <State>\n";
         return prompt(promptText);
     };
 
@@ -29,7 +26,7 @@ const headerBarFactory = (weatherAppInterface) => {
         if (!pattern.test(userInput)) {
             const errMsg =
                 "Input Error - Unexpected Input Values\n" +
-                "Please enter city, state/country i.e.\nSt. Louis, MO";
+                "Please enter city, state/country i.e.\nChicago, Illinois";
             alert(errMsg);
         }
         return pattern.test(userInput);
